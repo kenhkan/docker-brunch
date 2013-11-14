@@ -1,10 +1,18 @@
-## docco-brunch
-Adds DOCCO support to [brunch](http://brunch.io).
+# docker-brunch
 
-## Usage
-Add `"doco-brunch": "x.y.z"` to `package.json` of your brunch app.
+Adds [Docker](https://github.com/jbt/docker) support to
+[brunch](http://brunch.io).
 
-Pick a plugin version that corresponds to your minor (y) brunch version.
 
-If you want to use git version of plugin, add
-`"docco-brunch": "git+ssh://git@github.com:jcruz2us/docco-brunch.git"`.
+## Installation
+
+1. Get [Node/NPM](http://nodejs.org/)
+2. Get [Brunch](http://brunch.io) by running `npm install -g brunch`
+3. Get [Pygments](http://pygments.org/) by running `pip pygments`
+3. Save to `package.json` by running `npm install --save-dev docker-brunch`
+
+
+## Plugin Config
+
+* `input_dir`: Path to input source directory. Defaults to current directory.
+* `output_dir`: Path to output doc directory. Defaults to ./doc.
