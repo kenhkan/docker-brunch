@@ -1,6 +1,6 @@
 {
   "name": "docker-brunch",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Adds Docker support to brunch",
   "main": "./lib/index",
   "author": "Kenneth Kan",
