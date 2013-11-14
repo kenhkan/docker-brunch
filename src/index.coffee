@@ -15,26 +15,18 @@ module.exports = class DockerRunner
     } = @config.plugins?.docker or {}
 
     # Deal with options
-    @prefix = input_dir or ''
     @inputDir = if input_dir? then " -i #{cwd}/#{input_dir}" else ''
     @outputDir = if output_dir? then " -o #{cwd}/#{output_dir}" else ''
 
-  compile: (params, callback) ->
-    # Run Docker only changed files, which are relative to project's root
-    @runDocker [params.path]
-
-    callback null, params
-
-  runDocker: (files = []) ->
-    # Make sure files are relative to `cwd`
-    files = for file in files
-      # Remove prefix as it's in the file
-      file.replace (new RegExp "^#{@prefix}/"), ''
-
+  lint: (data, path, callback) ->
+    # Run through the entire directory at once again because we need Docker to
+    # generate the directory tree
     command = """
-      #{__dirname}/../node_modules/.bin/docker#{@inputDir}#{@outputDir} #{files.join ' '}
+      #{__dirname}/../node_modules/.bin/docker#{@inputDir}#{@outputDir} #{@inputDir}
     """
 
-    # Run Docker executable with files
+    # Run Docker
     child_process.exec command, (error, stdout, stderr) ->
       console.log "exec error: #{error}" if error?
+
+    callback null
